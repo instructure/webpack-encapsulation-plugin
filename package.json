@@ -1,6 +1,6 @@
 {
   "name": "webpack-encapsulation-plugin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Control access to modules bundled by Webpack",
   "main": "lib/index.js",
   "exports": {
@@ -24,7 +24,7 @@
     "webpack": "^4"
   },
   "dependencies": {
-    "esmac": "^1.0.3",
+    "esmac": "^3.0.0",
     "invariant": "^2.2.4"
   },
   "scripts": {

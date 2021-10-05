@@ -58,7 +58,6 @@ describe('EncapsulationPlugin', () => {
           target: error.target,
           request: error.request,
           ruleIndex: error.ruleIndex,
-          ruleOutput: error.ruleOutput,
         }
       }).sort((a,b) => a.source > b.source ? 1 : -1)
 
@@ -69,7 +68,6 @@ describe('EncapsulationPlugin', () => {
           target: 'lib/c.js',
           request: 'me-in-test/lib/c.js',
           ruleIndex: 0,
-          ruleOutput: {},
         },
         {
           name: 'SpecifierMismatchError',
@@ -77,10 +75,6 @@ describe('EncapsulationPlugin', () => {
           target: 'packages/foo/lib/index.js',
           request: '../../foo/lib',
           ruleIndex: 2,
-          ruleOutput: {
-            pjsonFile: require.resolve('./fixture/packages/foo/package.json'),
-            pjson: require('./fixture/packages/foo/package.json'),
-          },
         },
         {
           name: 'AccessViolationError',
@@ -88,7 +82,6 @@ describe('EncapsulationPlugin', () => {
           target: 'lib/a.js',
           request: 'me-in-test/lib/a',
           ruleIndex: undefined,
-          ruleOutput: undefined,
         },
         {
           name: 'SpecifierMismatchError',
@@ -96,7 +89,6 @@ describe('EncapsulationPlugin', () => {
           target: 'packages/foo/lib/b.js',
           request: 'foo/lib/b',
           ruleIndex: 1,
-          ruleOutput: {}
         }
       ])
     }

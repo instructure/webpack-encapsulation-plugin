@@ -43,5 +43,4 @@ type SpecifierMismatchError {
   request = String;
   rule = Rule;
   ruleIndex = Number;
-  ruleOutput = Object;
 };
