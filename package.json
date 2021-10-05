@@ -1,6 +1,6 @@
 {
   "name": "webpack-encapsulation-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Control access to modules bundled by Webpack",
   "main": "lib/index.js",
   "exports": {
@@ -10,10 +10,10 @@
     "./errors/SpecifierMismatchError": "./lib/errors/SpecifierMismatchError.js"
   },
   "files": [
-    "./package.json",
-    "./README.md",
-    "./lib",
-    "./types.d.ts"
+    "package.json",
+    "README.md",
+    "lib",
+    "types.d.ts"
   ],
   "devDependencies": {
     "chai": "^4.3.4",
