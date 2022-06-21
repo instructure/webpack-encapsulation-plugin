@@ -7,51 +7,11 @@ const { assert } = require('chai')
 
 describe('EncapsulationPlugin', () => {
   it('works', (done) => {
-    const AbortOnEmitError = new Error('Abort')
-    const compiler = webpack({
-      entry: path.resolve(__dirname, './fixture/lib/index.js'),
-      context: path.resolve(__dirname, 'fixture'),
-      resolve: {
-        modules: [path.resolve(__dirname, 'fixture/packages')],
-        alias: {
-          'me-in-test': path.resolve(__dirname, 'fixture')
-        }
-      },
-      plugins: [
-        {
-          apply(compiler) {
-            compiler.hooks.emit.tapAsync('DontEmit', (compilation, callback) => {
-              callback(AbortOnEmitError)
-            })
-          }
-        },
+    const compiler = webpack(require('./fixture/webpack.config.js'))
 
-        new EncapsulationPlugin({
-          rules: [
-            {
-              source: 'lib/**',
-              target: 'lib/**',
-              specifier: 'relative'
-            },
-            {
-              source: 'packages/*/**',
-              target: 'packages/*/**',
-              boundary: 0,
-              specifier: 'relative',
-            },
-            {
-              source: '**',
-              target: 'packages/**',
-              specifier: 'package'
-            }
-          ]
-        })
-      ]
-    })
-
-    const runAssertions = output => {
-      const errors = output.compilation.errors
-      const errorsInOrder = errors.map(error => {
+    const runAssertions = errors => {
+      const sort = x => x.sort((a,b) => a.source > b.source ? 1 : -1)
+      const errorsInOrder = sort(errors.map(error => {
         return {
           name: error.name,
           source: error.source,
@@ -59,9 +19,9 @@ describe('EncapsulationPlugin', () => {
           request: error.request,
           ruleIndex: error.ruleIndex,
         }
-      }).sort((a,b) => a.source > b.source ? 1 : -1)
+      }))
 
-      assert.deepEqual(errorsInOrder, [
+      assert.deepEqual(errorsInOrder, sort([
         {
           name: 'SpecifierMismatchError',
           source: 'lib/b.js',
@@ -90,26 +50,32 @@ describe('EncapsulationPlugin', () => {
           request: 'foo/lib/b',
           ruleIndex: 1,
         }
-      ])
+      ]))
     }
 
     compiler.run(function(err, output) {
-      // welcome, welcome to the land of all that is node
-      if (err && err === AbortOnEmitError) {
-        done(new Error('build should not have passed!!!'))
-      }
-      else if (err) {
+      if (err) {
         done(err)
       }
       else {
-        const webpackErrors = output.compilation.errors.filter(notOurError)
+        const webpackErrors = []
+        const ourErrors = []
+
+        for (const error of output.compilation.errors) {
+          if (isOurError(error.error)) {
+            ourErrors.push(error)
+          }
+          else {
+            webpackErrors.push(error)
+          }
+        }
 
         if (webpackErrors.length) {
           done(...webpackErrors)
         }
         else {
           try {
-            runAssertions(output)
+            runAssertions(ourErrors.map(x => x.error))
             done()
           }
           catch (e) {
@@ -121,7 +87,7 @@ describe('EncapsulationPlugin', () => {
   })
 })
 
-const notOurError = error => (
-  !(error instanceof SpecifierMismatchError) &&
-  !(error instanceof AccessViolationError)
+const isOurError = error => (
+  (error instanceof SpecifierMismatchError) ||
+  (error instanceof AccessViolationError)
 )

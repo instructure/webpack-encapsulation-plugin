@@ -22,6 +22,10 @@ type EncapsulationPluginOptions = {
   // hints and suggestions to the user to help them fix the reported problems
   // with this hook.
   ?formatter: ErrorFormatter;
+
+  // Allow specific errors to go through. This gives you room to fix existing
+  // errors and at the same time prevent new ones from being introduced.
+  ?permit: PermittedError[];
 };
 
 // When given a String, the filter checks if the value starts with that string.
@@ -43,4 +47,11 @@ type SpecifierMismatchError {
   request = String;
   rule = Rule;
   ruleIndex = Number;
+};
+
+type PermittedError {
+  name = "AccessViolationError" | "SpecifierMismatchError";
+  source = Pathname;
+  target = Pathname;
+  request = String;
 };
