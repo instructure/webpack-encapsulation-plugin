@@ -1,6 +1,6 @@
 import type { Rule } from 'esmac/types.d.ts'
 
-type EncapsulationPluginOptions = {
+type ESMACPluginOptions = {
   // Set of rules to provide to esmac.
   rules: Rule[];
 
@@ -30,8 +30,8 @@ type EncapsulationPluginOptions = {
 
 // When given a String, the filter checks if the value starts with that string.
 type PathFilter = String | RegExp;
-type ErrorFormatter = (error: EncapsulationError) => String;
-type EncapsulationError = AccessViolationError | SpecifierMismatchError;
+type ErrorFormatter = (error: ESMACPluginError) => String;
+type ESMACPluginError = AccessViolationError | SpecifierMismatchError;
 
 // Raised when no rule was found that applies to the dependency
 type AccessViolationError {

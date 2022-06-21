@@ -1,6 +1,6 @@
 {
-  "name": "webpack-encapsulation-plugin",
-  "version": "3.0.0",
+  "name": "webpack-esmac-plugin",
+  "version": "4.0.0",
   "description": "Control access to modules bundled by Webpack",
   "main": "lib/index.js",
   "exports": {
@@ -33,13 +33,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/instructure/webpack-encapsulation-plugin.git"
+    "url": "git+https://github.com/instructure/webpack-esmac-plugin.git"
   },
   "keywords": [
     "acl",
     "access control",
+    "module access control",
     "encapsulation",
-    "capsule",
     "esm",
     "es modules",
     "module scope",
@@ -49,7 +49,7 @@
   "author": "Ahmad Amireh <ahmad@instructure.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/instructure/webpack-encapsulation-plugin/issues"
+    "url": "https://github.com/instructure/webpack-esmac-plugin/issues"
   },
-  "homepage": "https://github.com/instructure/webpack-encapsulation-plugin#readme"
+  "homepage": "https://github.com/instructure/webpack-esmac-plugin#readme"
 }

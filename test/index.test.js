@@ -1,11 +1,11 @@
-const EncapsulationPlugin = require('webpack-encapsulation-plugin')
-const AccessViolationError = require('webpack-encapsulation-plugin/errors/AccessViolationError')
-const SpecifierMismatchError = require('webpack-encapsulation-plugin/errors/SpecifierMismatchError')
+const ESMACPlugin = require('webpack-esmac-plugin')
+const AccessViolationError = require('webpack-esmac-plugin/errors/AccessViolationError')
+const SpecifierMismatchError = require('webpack-esmac-plugin/errors/SpecifierMismatchError')
 const path = require('path')
 const webpack = require('webpack')
 const { assert } = require('chai')
 
-describe('EncapsulationPlugin', () => {
+describe('ESMACPlugin', () => {
   it('works', (done) => {
     const compiler = webpack(require('./fixture/webpack.config.js'))
 

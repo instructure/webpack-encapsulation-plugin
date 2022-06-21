@@ -1,7 +1,7 @@
-# Webpack Encapsulation Plugin
+# Webpack ESMAC Plugin
 
-An implementation of [esmac] for Webpack to control access between modules and
-enforce file-layer encapsulation. See that project for more details.
+An implementation of [esmac] for Webpack to control access between modules. See
+that project for more details.
 
 ## Usage
 
@@ -11,11 +11,11 @@ required argument, which is the set of rules to provide to [esmac].
 
 ```javascript
 // file: webpack.config.js
-const EncapsulationPlugin = require('webpack-encapsulation-plugin')
+const ESMACPlugin = require('webpack-esmac-plugin')
 
 module.exports = {
   plugins: [
-    new EncapsulationPlugin({
+    new ESMACPlugin({
       rules: [ ... ]
     })
   ]

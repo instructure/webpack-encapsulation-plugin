@@ -1,3 +1,7 @@
+## 4.0.0
+
+rename package to webpack-esmac-plugin
+
 ## 3.0.0
 
 - now compatible only with Webpack 5, if you're still using Webpack 4, continue

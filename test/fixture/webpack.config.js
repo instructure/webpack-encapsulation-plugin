@@ -1,5 +1,5 @@
 const path = require('path')
-const EncapsulationPlugin = require('../../')
+const ESMACPlugin = require('../../')
 
 module.exports = {
   mode: 'development',
@@ -12,7 +12,7 @@ module.exports = {
     }
   },
   plugins: [
-    new EncapsulationPlugin({
+    new ESMACPlugin({
       rules: [
         {
           source: 'lib/**',
